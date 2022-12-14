@@ -3,9 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33103.201
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{25591C88-807A-4BE9-91E0-606EA8469302}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftMessageQueuing.WindowsFormsApp", "Src\MicrosoftMessageQueuing.WindowsFormsApp\MicrosoftMessageQueuing.WindowsFormsApp.csproj", "{312FCAEE-8959-4E0F-812B-9A3ECEEF2660}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{312FCAEE-8959-4E0F-812B-9A3ECEEF2660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{312FCAEE-8959-4E0F-812B-9A3ECEEF2660}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{312FCAEE-8959-4E0F-812B-9A3ECEEF2660}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{312FCAEE-8959-4E0F-812B-9A3ECEEF2660}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{312FCAEE-8959-4E0F-812B-9A3ECEEF2660} = {25591C88-807A-4BE9-91E0-606EA8469302}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A81046F7-3357-4F0E-B42D-A5595974F8DE}
