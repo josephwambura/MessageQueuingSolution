@@ -13,7 +13,7 @@ namespace MicrosoftMessageQueuing.WindowsFormsApp
 {
     public partial class FormMain : Form
     {
-        string queuePath = ".\\Private$\\billpay";
+        private readonly string queuePath = ".\\Private$\\billpay";
 
         public FormMain()
         {
