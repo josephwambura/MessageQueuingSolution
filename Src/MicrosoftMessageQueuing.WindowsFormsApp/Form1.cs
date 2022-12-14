@@ -13,6 +13,8 @@ namespace MicrosoftMessageQueuing.WindowsFormsApp
 {
     public partial class FormMain : Form
     {
+        string queuePath = ".\\Private$\\billpay";
+
         public FormMain()
         {
             InitializeComponent();
@@ -31,13 +33,67 @@ namespace MicrosoftMessageQueuing.WindowsFormsApp
                 Body = myPayment
             };
 
-            MessageQueue msgQ = new MessageQueue(".\\Private$\\billpay");
+            MessageQueue msgQ;
+            if (MessageQueue.Exists(queuePath) == false)
+            {
+                //Queue does not exist so create it
+                msgQ = MessageQueue.Create(queuePath);
+            }
+            else
+            {
+                msgQ = new MessageQueue(queuePath);
+            }
+
             msgQ.Send(msg);
         }
 
         private void buttonProcessPayment_Click(object sender, EventArgs e)
         {
+            MessageQueue msgQ;
+            if (MessageQueue.Exists(queuePath) == false)
+            {
+                //Queue does not exist so create it
+                msgQ = MessageQueue.Create(queuePath);
+            }
+            else
+            {
+                msgQ = new MessageQueue(queuePath);
+            }
 
+            Payment myPayment = new Payment();
+            object o = new object();
+            Type[] arrTypes = new Type[2];
+            arrTypes[0] = myPayment.GetType();
+            arrTypes[1] = o.GetType();
+            msgQ.Formatter = new XmlMessageFormatter(arrTypes);
+
+            try
+            {
+                myPayment = (Payment)msgQ.Receive(new TimeSpan(0, 0, 30)).Body;
+
+                StringBuilder sb = new StringBuilder();
+                sb.Append("Payment paid to: " + myPayment.Payor);
+                sb.Append("\n");
+                sb.Append("Paid by: " + myPayment.Payee);
+                sb.Append("\n");
+                sb.Append("Amount: Ksh. " + myPayment.Amount.ToString());
+                sb.Append("\n");
+                sb.Append("Due Date: " + Convert.ToDateTime(myPayment.DueDate));
+
+                MessageBox.Show(sb.ToString(), "Message Received!");
+            }
+            catch (MessageQueueException ex)
+            {
+
+                //throw;
+                MessageBox.Show(ex.ToString(), "MessageQueueException receiving message!");
+            }
+            catch (Exception ex)
+            {
+
+                //throw;
+                MessageBox.Show(ex.ToString(), "Exception receiving message!");
+            }
         }
     }
 
