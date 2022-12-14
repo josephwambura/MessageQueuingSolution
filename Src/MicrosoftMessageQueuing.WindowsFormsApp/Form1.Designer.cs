@@ -38,6 +38,7 @@
             this.buttonSendPayment = new System.Windows.Forms.Button();
             this.buttonProcessPayment = new System.Windows.Forms.Button();
             this.dateTimePickerDueDate = new System.Windows.Forms.DateTimePicker();
+            this.listBoxQueues = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // labelPayTo
@@ -99,7 +100,7 @@
             // 
             // buttonSendPayment
             // 
-            this.buttonSendPayment.Location = new System.Drawing.Point(435, 283);
+            this.buttonSendPayment.Location = new System.Drawing.Point(313, 283);
             this.buttonSendPayment.Name = "buttonSendPayment";
             this.buttonSendPayment.Size = new System.Drawing.Size(109, 23);
             this.buttonSendPayment.TabIndex = 8;
@@ -109,7 +110,7 @@
             // 
             // buttonProcessPayment
             // 
-            this.buttonProcessPayment.Location = new System.Drawing.Point(559, 283);
+            this.buttonProcessPayment.Location = new System.Drawing.Point(437, 283);
             this.buttonProcessPayment.Name = "buttonProcessPayment";
             this.buttonProcessPayment.Size = new System.Drawing.Size(133, 23);
             this.buttonProcessPayment.TabIndex = 9;
@@ -125,11 +126,21 @@
             this.dateTimePickerDueDate.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerDueDate.TabIndex = 10;
             // 
+            // listBoxQueues
+            // 
+            this.listBoxQueues.FormattingEnabled = true;
+            this.listBoxQueues.Location = new System.Drawing.Point(581, 63);
+            this.listBoxQueues.Name = "listBoxQueues";
+            this.listBoxQueues.Size = new System.Drawing.Size(189, 355);
+            this.listBoxQueues.TabIndex = 11;
+            this.listBoxQueues.Click += new System.EventHandler(this.listBoxQueues_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.listBoxQueues);
             this.Controls.Add(this.dateTimePickerDueDate);
             this.Controls.Add(this.buttonProcessPayment);
             this.Controls.Add(this.buttonSendPayment);
@@ -142,6 +153,7 @@
             this.Controls.Add(this.labelPayTo);
             this.Name = "FormMain";
             this.Text = "Main Form";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,6 +171,7 @@
         private System.Windows.Forms.Button buttonSendPayment;
         private System.Windows.Forms.Button buttonProcessPayment;
         private System.Windows.Forms.DateTimePicker dateTimePickerDueDate;
+        private System.Windows.Forms.ListBox listBoxQueues;
     }
 }
 
