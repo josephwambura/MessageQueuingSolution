@@ -100,7 +100,7 @@
             // 
             // buttonSendPayment
             // 
-            this.buttonSendPayment.Location = new System.Drawing.Point(313, 283);
+            this.buttonSendPayment.Location = new System.Drawing.Point(252, 283);
             this.buttonSendPayment.Name = "buttonSendPayment";
             this.buttonSendPayment.Size = new System.Drawing.Size(109, 23);
             this.buttonSendPayment.TabIndex = 8;
@@ -110,11 +110,11 @@
             // 
             // buttonProcessPayment
             // 
-            this.buttonProcessPayment.Location = new System.Drawing.Point(437, 283);
+            this.buttonProcessPayment.Location = new System.Drawing.Point(367, 283);
             this.buttonProcessPayment.Name = "buttonProcessPayment";
-            this.buttonProcessPayment.Size = new System.Drawing.Size(133, 23);
+            this.buttonProcessPayment.Size = new System.Drawing.Size(183, 23);
             this.buttonProcessPayment.TabIndex = 9;
-            this.buttonProcessPayment.Text = "Process Payment";
+            this.buttonProcessPayment.Text = "Process Payment First in Queue";
             this.buttonProcessPayment.UseVisualStyleBackColor = true;
             this.buttonProcessPayment.Click += new System.EventHandler(this.buttonProcessPayment_Click);
             // 

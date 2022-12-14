@@ -13,7 +13,7 @@ namespace MicrosoftMessageQueuing.WindowsFormsApp
 {
     public partial class FormMain : Form
     {
-        private readonly string queuePath = ".\\Private$\\billpay";
+        private readonly string _queuePath = ".\\Private$\\billpay";
 
         public FormMain()
         {
@@ -24,10 +24,10 @@ namespace MicrosoftMessageQueuing.WindowsFormsApp
         {
             Payment myPayment;
 
-            if (!string.IsNullOrWhiteSpace(textBoxYourName.Text)
-                && !string.IsNullOrWhiteSpace(textBoxPayTo.Text)
-                && !string.IsNullOrWhiteSpace(textBoxAmount.Text)
-                && !string.IsNullOrWhiteSpace(dateTimePickerDueDate.Text))
+            if (string.IsNullOrWhiteSpace(textBoxYourName.Text)
+                || string.IsNullOrWhiteSpace(textBoxPayTo.Text)
+                || string.IsNullOrWhiteSpace(textBoxAmount.Text)
+                || string.IsNullOrWhiteSpace(dateTimePickerDueDate.Text))
             {
                 return;
             }
@@ -42,16 +42,7 @@ namespace MicrosoftMessageQueuing.WindowsFormsApp
                 Body = myPayment
             };
 
-            MessageQueue msgQ;
-            if (MessageQueue.Exists(queuePath) == false)
-            {
-                //Queue does not exist so create it
-                msgQ = MessageQueue.Create(queuePath);
-            }
-            else
-            {
-                msgQ = new MessageQueue(queuePath);
-            }
+            MessageQueue msgQ = GetMessageQueue(_queuePath);
 
             msgQ.Send(msg);
 
@@ -60,16 +51,7 @@ namespace MicrosoftMessageQueuing.WindowsFormsApp
 
         private void buttonProcessPayment_Click(object sender, EventArgs e)
         {
-            MessageQueue msgQ;
-            if (MessageQueue.Exists(queuePath) == false)
-            {
-                //Queue does not exist so create it
-                msgQ = MessageQueue.Create(queuePath);
-            }
-            else
-            {
-                msgQ = new MessageQueue(queuePath);
-            }
+            MessageQueue msgQ = GetMessageQueue(_queuePath);
 
             Payment myPayment = new Payment();
             object o = new object();
@@ -116,16 +98,7 @@ namespace MicrosoftMessageQueuing.WindowsFormsApp
 
         private void loadListBoxWithMessages()
         {
-            MessageQueue msgQ;
-            if (MessageQueue.Exists(queuePath) == false)
-            {
-                //Queue does not exist so create it
-                msgQ = MessageQueue.Create(queuePath);
-            }
-            else
-            {
-                msgQ = new MessageQueue(queuePath);
-            }
+            MessageQueue msgQ = GetMessageQueue(_queuePath);
 
             listBoxQueues.BeginUpdate();
             listBoxQueues.DataSource = msgQ.GetAllMessages().ToList();
@@ -140,16 +113,7 @@ namespace MicrosoftMessageQueuing.WindowsFormsApp
 
             if (dialogResult == DialogResult.Yes)
             {
-                MessageQueue msgQ;
-                if (MessageQueue.Exists(queuePath) == false)
-                {
-                    //Queue does not exist so create it
-                    msgQ = MessageQueue.Create(queuePath);
-                }
-                else
-                {
-                    msgQ = new MessageQueue(queuePath);
-                }
+                MessageQueue msgQ = GetMessageQueue(_queuePath);
 
                 Payment myPayment = new Payment();
                 object o = new object();
@@ -187,6 +151,19 @@ namespace MicrosoftMessageQueuing.WindowsFormsApp
                     //throw;
                     MessageBox.Show(ex.ToString(), "Exception receiving message!");
                 }
+            }
+        }
+
+        private static MessageQueue GetMessageQueue(string queuePath)
+        {
+            if (MessageQueue.Exists(queuePath) == false)
+            {
+                //Queue does not exist so create it
+                return MessageQueue.Create(queuePath);
+            }
+            else
+            {
+                return new MessageQueue(queuePath);
             }
         }
     }
